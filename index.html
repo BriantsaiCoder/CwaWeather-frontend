@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>森森天氣</title>
-    <link rel="icon" type="image/png" href="./icon-v2.png" />
-    <link rel="apple-touch-icon" href="./icon-v2.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./icon-v2.png" />
+    <title>小叮噹天氣預報</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔔</text></svg>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,14 +15,15 @@
 
     <style>
       :root {
-        --ac-green: #7de1a9;
-        --ac-bg-pattern: #8fd8af;
-        --ac-cream: #fffef2;
-        --ac-yellow: #f9f195;
-        --ac-brown: #796452;
-        --ac-blue: #4fb5d9;
-        --ac-dark: #58504a;
-        --ac-card-border: #e6e0c8;
+        /* 小叮噹配色 */
+        --ac-green: #009eff; /* 身體藍 */
+        --ac-bg-pattern: #33b1ff;
+        --ac-cream: #ffffff; /* 臉白 */
+        --ac-yellow: #f8c61c; /* 鈴鐺黃 */
+        --ac-brown: #333333; /* 線條黑 */
+        --ac-blue: #dd0016; /* 鼻子/項圈紅 (借用變數) */
+        --ac-dark: #333333;
+        --ac-card-border: #333333;
       }
 
       * {
@@ -264,8 +265,8 @@
 
   <body>
     <div id="loading" class="loading-screen">
-      <div style="font-size: 4rem; animation: bounce 2s infinite">☁️</div>
-      <p style="color: white; font-weight: bold; margin-top: 20px">正在觀測雲的流動...</p>
+      <div style="font-size: 4rem; animation: bounce 2s infinite">🔔</div>
+      <p style="color: white; font-weight: bold; margin-top: 20px">正在拿出任意門...</p>
     </div>
     <div class="status-bar">
       <div class="location-pill">📍 高雄</div>
@@ -283,30 +284,30 @@
       const API_URL = 'https://cwaweather-backend-kaousiung.zeabur.app/api/weather/kaohsiung';
 
       function getWeatherIcon(weather) {
-        if (!weather) return '🌤️';
-        if (weather.includes('晴')) return '☀️';
-        if (weather.includes('多雲')) return '⛅';
-        if (weather.includes('陰')) return '☁️';
-        if (weather.includes('雨')) return '🌧️';
-        if (weather.includes('雷')) return '⛈️';
-        return '🌤️';
+        if (!weather) return '🔔';
+        if (weather.includes('晴')) return '🚁';
+        if (weather.includes('多雲')) return '☁️';
+        if (weather.includes('陰')) return '🌫️';
+        if (weather.includes('雨')) return '☔';
+        if (weather.includes('雷')) return '⚡';
+        return '🔔';
       }
 
       function getAdvice(rainProb, maxTemp) {
-        let rainIcon = '🌂';
+        let rainIcon = '🚁';
         let rainText = '不用帶傘';
         if (parseInt(rainProb) > 30) {
-          rainIcon = '☂️';
+          rainIcon = '☔';
           rainText = '記得帶傘！';
         }
 
         let clothIcon = '👕';
         let clothText = '舒適穿搭';
         if (parseInt(maxTemp) >= 28) {
-          clothIcon = '🎽';
+          clothIcon = '🍧';
           clothText = '短袖出發';
         } else if (parseInt(maxTemp) <= 20) {
-          clothIcon = '🧥';
+          clothIcon = '🧣';
           clothText = '加件外套';
         }
 
@@ -415,7 +416,7 @@
           }
         } catch (e) {
           console.error(e);
-          alert('天氣資料讀取失敗，狸克把網路線咬斷了！');
+          alert('天氣資料讀取失敗，胖虎把網路線拔掉了！');
         }
       }
 
